@@ -13,4 +13,4 @@ $data = json_decode(file_get_contents('php://input'), true);
 $contacto = new atl_contacto();
 
 //muestro listado
-$contacto->listarContactos();
+echo $contacto->listarContactos();

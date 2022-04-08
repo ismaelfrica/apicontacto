@@ -13,20 +13,17 @@ EL siguientes es agregar
 Se debe de pasar 3 parametros, nombre, apellido y email, el formato quedaria de esta manera y esta es la url para hacerlo
 http://localhost/apiatl/api/v1/contacto/agregar
 
-[
     {
         "nombre" : "ismael",
         "apellido" : "Frica",
         "email" : "ismaefr8@gmail.com"
 
     }
-]
 
 Para actualizar o modificar solo se necesita agregar el campo id y listo, con el siguiente link podemos obtener el update
 http://localhost/apiatl/api/v1/contacto/editar
 
 
-[
     {
         "id" : "1",
         "nombre" : "ismael",
@@ -34,10 +31,13 @@ http://localhost/apiatl/api/v1/contacto/editar
         "email" : "ismaefr8@gmail.com"
 
     }
-]
 
 Para eliminar solo se debe de pasar el ID que desea hacerlo en el siguiente link
 
 http://localhost/apiatl/api/v1/contacto/eliminar
+
+    {
+        "id" : "1"
+    }
 
 El tiempo para la realizacion de esta actividad fue 43 minutos con 34 segundos.

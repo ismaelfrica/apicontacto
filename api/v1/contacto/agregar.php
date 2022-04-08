@@ -9,9 +9,5 @@ include("../../../libreria/engine.php");
 //recibo los parametros 
 $data = json_decode(file_get_contents('php://input'), true);
 
-//instancio la clase
-$contacto = new atl_contacto();
-
-
 //validacion y ejecucion de agregar
-validarRegistro($data,'agregar');
+validarRegistro($data, 'agregar');
