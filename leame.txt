@@ -1,29 +1,2 @@
 El api funciona de la siguiente manera:
 
-Los campos a utilizar son los siguientes
-
-[
-    {
-    "id" : "1",
-    "nombre" : "Edward",
-    "apellido" : "Frica",
-    "email" : "ismaelfr18@gmail.com",
-    "estado" : 1
-    }
-]
-
-Donde el id es el id que tomará el registro, si se quiere insertar sólo se coloca 0, si se quiere actualizar
- solo se coloca el id que desee actualizar, si es el caso de que no aparezca el id, el API, le notificaría.
-
-Para listar todos los registros, sólo se debe dejar en blanco las peticiones, es decir, y el API asumirá que lo 
-que usted desea es ver el listado
-
-[
-
-]
-
-Si desea eliminar un registro, sólo debe de colocar el estado en 0, y el automáticamente desaparece del listado, cambiado su estado
-a inactivo, si se recibe una peticion para el mismo ID de querer eliminar un reigstro que ya fue eliminado
-arrojará un mensaje diciendo que ese ID no existe.
-
-NOTA: EL API NO BORRA NADA DE LA BASE DE DATOS, SOLO LE CAMBIA EL ESTADO Y SE OCULTA A SIMPLE VISTA.
