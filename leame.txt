@@ -1,2 +1,10 @@
 El api funciona de la siguiente manera:
 
+En los siguientes enlaces se podrá realizar lo pedido en el ejercicio
+
+Para obtener el listado de los contactos se hace mediante el metodo GET y el link es el siguiente
+
+http://midominio/api/v1/contacto/getcontacto
+
+No hay que pasar parametros
+
