@@ -5,7 +5,7 @@
 			var $nombre; 	//253
 			var $apellido; 	//10
 			var $email; 	//10
-			var $stad; 	//3
+			var $estado; 	//3
 			
 		
 			function __construct($id=0)
@@ -21,7 +21,6 @@
 			{
 				$rs = true;
 				global $con;
-				$this->validarEntrada();
 				if($this->id > 0)
 				{
 					$sql = "update atl_contactos set nombre = '$this->nombre',apellido = '$this->apellido',email = '$this->email',estado = '$this->estado' 
@@ -39,6 +38,7 @@
 					$this->id = mysqli_insert_id(Ejecutar::getCon());
 					echo mysqli_error(Ejecutar::getCon());
 				}
+				
 				return $rs;
 			}
 			
@@ -52,16 +52,6 @@
 				$this->apellido = $row['apellido'];
 				$this->email = $row['email'];
 				$this->estado = $row['estado'];
-			
-			}
-			
-			function validarEntrada()
-			{
-				$this->id = $this->id ;
-				$this->nombre = $this->nombre ;
-				$this->apellido = $this->apellido ;
-				$this->email = $this->email ;
-				$this->stad = $this->stad ;
 			
 			}
 			

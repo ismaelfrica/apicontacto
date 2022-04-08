@@ -40,4 +40,4 @@ Para eliminar solo se debe de pasar el ID que desea hacerlo en el siguiente link
 
 http://localhost/apiatl/api/v1/contacto/eliminar
 
-El tiempo para la realizacion de esta actividad fue 45 minutos.
+El tiempo para la realizacion de esta actividad fue 43 minutos con 34 segundos.
