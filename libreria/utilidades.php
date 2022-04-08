@@ -94,105 +94,98 @@
 				}
 			}
 			
-				if($todoBien==false){
-					echo json_encode($mensaje);
-					die;
+			if($todoBien==false){
+				echo json_encode($mensaje);
+				die;
+			}else{
+				if($validarId!="")
+				{
+					$contacto->id=$data[$i]['id'];
 				}else{
-					if($validarId!="")
-					{
-						$contacto->id=$data[$i]['id'];
-					}else{
-						$contacto->id=0;
-					}
-					
-					if($nombre=='')
-					{
-						$mensaje[] = "Error al procesar, el campo nombre es obligatorio";
+					$contacto->id=0;
+				}
+				
+				if($nombre=='')
+				{
+					$mensaje[] = "Error al procesar, el campo nombre es obligatorio";
+					$todoBien = false;
+				}else{
+					$contacto->nombre = $nombre;	
+				}
+				
+				if($apellido=='')
+				{
+					$mensaje[] = "Error al procesar, el campo apellido es obligatorio";
+					$todoBien = false;
+				}else{
+					$contacto->apellido = $apellido;	
+				}
+				
+				if($email=='')
+				{
+					$mensaje[] = "Error al procesar, el campo email es obligatorio";
+					$todoBien = false;
+				}else{
+					$contacto->email = $email;	
+				}
+				
+			//Inicio del Switch para empezar accionar por tipo de peticion
+			switch ($origen){
+				case "agregar":
+					//Validar si Email existe
+					if(validarEmailExiste($contacto->email)===true){
+						$mensaje[] = "Error al procesar, el email ". $contacto->email." ya existe";
 						$todoBien = false;
 					}else{
-						$contacto->nombre = $nombre;	
+						$contacto->nombre = $data[$i]['nombre'];
+						$contacto->apellido = $data[$i]['apellido'];
+						$contacto->email = $data[$i]['email'];
+						$contacto->estado = 1;
+						$contacto->guardar();
+						$mensaje[] = "Datos insertados";
+						
 					}
-					
-					if($apellido=='')
-					{
-						$mensaje[] = "Error al procesar, el campo apellido es obligatorio";
+				break;
+				
+				case "editar":
+					//Validar si ID existe
+					if(verificarIDExiste($contacto->id)===true){
+						$mensaje[] = "Error al procesar, el ID ". $contacto->id." no existe";
 						$todoBien = false;
 					}else{
-						$contacto->apellido = $apellido;	
-					}
-					
-					if($email=='')
-					{
-						$mensaje[] = "Error al procesar, el campo email es obligatorio";
-						$todoBien = false;
-					}else{
-						$contacto->email = $email;	
-					}
-					
-				//Inicio del Switch para empezar accionar por tipo de peticion
-				switch ($origen){
-					case "agregar":
-						//Validar si Email existe
-						if(validarEmailExiste($contacto->email)===true){
-							$mensaje[] = "Error al procesar, el email ". $contacto->email." ya existe";
-							$todoBien = false;
-						}else{
+						if($todoBien===true){
+							$contacto->id = $contacto->id;
 							$contacto->nombre = $data[$i]['nombre'];
 							$contacto->apellido = $data[$i]['apellido'];
 							$contacto->email = $data[$i]['email'];
 							$contacto->estado = 1;
 							$contacto->guardar();
-							$mensaje[] = "Datos insertados";
-							
+							$mensaje[] = "Datos actualizados";
 						}
-					break;
-					
-					case "editar":
-						//Validar si ID existe
-						if(verificarIDExiste($contacto->id)===true){
-							$mensaje[] = "Error al procesar, el ID ". $contacto->id." no existe";
-							$todoBien = false;
-						}else{
-							if($todoBien===true){
-								$contacto->id = $contacto->id;
-								$contacto->nombre = $data[$i]['nombre'];
-								$contacto->apellido = $data[$i]['apellido'];
-								$contacto->email = $data[$i]['email'];
-								$contacto->estado = 1;
-								$contacto->guardar();
-								$mensaje[] = "Datos actualizados";
-							}
+					}
+				break;
+				
+				case "eliminar":
+					//Validar si ID existe
+					if(verificarIDExiste($contacto->id)===true){
+						$mensaje[] = "Error al procesar, el ID ". $contacto->id." no existe";
+						$todoBien = false;
+					}else{
+						if($todoBien===true){
+							$contacto->id =  $contacto->id;
+							$contacto->nombre =  $contacto->nombre;
+							$contacto->apellido =  $contacto->apellido;
+							$contacto->email =  $contacto->email;
+							$contacto->estado = 0;
+							$contacto->guardar();
+							$mensaje[] = "Dato eliminado";
 						}
-							
-						
-					break;
-					
-					case "eliminar":
-						//Validar si ID existe
-						if(verificarIDExiste($contacto->id)===true){
-							$mensaje[] = "Error al procesar, el ID ". $contacto->id." no existe";
-							$todoBien = false;
-						}else{
-							if($todoBien===true){
-								
-								
-								
-								$contacto->id =  $contacto->id;
-								$contacto->nombre =  $contacto->nombre;
-								$contacto->apellido =  $contacto->apellido;
-								$contacto->email =  $contacto->email;
-								$contacto->estado = 0;
-								$contacto->guardar();
-								$mensaje[] = "Dato eliminado";
-							}
-						}
-							
-						
+					}
 					break;
 				}
 			}
 			echo json_encode($mensaje);
-						//Limpiamos los mensajes
-						unset($mensaje); 
+			//Limpiamos los mensajes
+			unset($mensaje); 
 		}
 	}
